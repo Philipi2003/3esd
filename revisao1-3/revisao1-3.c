@@ -6,8 +6,9 @@ No final deve ser exibido o maior tempo de treino e quantos atletas o fizeram
 #include <stdio.h>
 #define atletas 10
 
-void divisaoInteira(int tempoTreino, int *horas, int *minutos);
+void horario(int tempoTreino, int *horas, int *minutos);
 void calculaMaiorTempo(int tempoTreino, int *maiorTempo, int *contaMaiorTempo);
+int divisaoInteira(int dividendo, int divisor, int *quociente, int *resto);
 void espaco();
 
 void main()
@@ -21,21 +22,35 @@ void main()
     scanf("%d", &tempoTreino);
     // processo
     calculaMaiorTempo(tempoTreino, &maiorTempo, &contaMaiorTempo);
-    divisaoInteira(tempoTreino, &horasTreinadas, &minutosTreinados);
+    horario(tempoTreino, &horasTreinadas, &minutosTreinados);
     espaco();
     printf("Atleta %d fez %d:%d de treino", i + 1, horasTreinadas, minutosTreinados);
     espaco();
   }
   // saida
   espaco();
-  divisaoInteira(maiorTempo, &horasTreinadas, &minutosTreinados);
+  horario(maiorTempo, &horasTreinadas, &minutosTreinados);
   printf("O maior tempo de treino foi %d:%d, %d atletas fizeram esse tempo.", horasTreinadas, minutosTreinados, contaMaiorTempo);
 }
 
-void divisaoInteira(int tempoTreino, int *horas, int *minutos)
+int divisaoInteira(int dividendo, int divisor, int *quociente, int *resto)
 {
-  (*horas) = tempoTreino / 60;
-  (*minutos) = tempoTreino % 60;
+  if (divisor == 0)
+    if (dividendo == 0)
+      return -1;
+    else 
+      return 0;
+  else
+  {
+    (*quociente) = dividendo / divisor;
+    (*resto) = dividendo % divisor;
+    return 1;
+  }
+}
+
+void horario(int tempoTreino, int *horas, int *minutos)
+{
+  divisaoInteira(tempoTreino, 60, horas, minutos);
 }
 
 void calculaMaiorTempo(int tempoTreino, int *maiorTempo, int *contaMaiorTempo)
