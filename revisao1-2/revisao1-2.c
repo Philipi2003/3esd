@@ -50,14 +50,11 @@ int main(void)
 
 int DivisaoInteira(int dividendo, int divisor, int *quociente, int *resto)
 {
-  if (divisor == 0 && dividendo == 0)
-  {
-    return -1;
-  }
-  else if (divisor == 0)
-  {
-    return 0;
-  }
+  if (divisor == 0)
+    if (dividendo == 0)
+      return -1;
+    else 
+      return 0;
   else
   {
     (*quociente) = dividendo / divisor;
