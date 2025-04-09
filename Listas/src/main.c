@@ -3,14 +3,14 @@
 
 int main()
 {
-    Lista *lista = criaLista(10, 0, 1);
+    Lista *lista = criaLista(10, 1, 1);
 
     adicionarNumero(lista, 4);
     adicionarNumero(lista, 2);
 
-    getNumeroElementos(lista);
+    // getNumeroElementos(lista);
 
-    listaElementos(lista);
+    // listaElementos(lista);
 
     return 0;
 }

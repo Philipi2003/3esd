@@ -1,5 +1,6 @@
 #include <stdlib.h>
 #include <stdio.h>
+#include <string.h>
 #include "Lista.h"
 
 struct tLista
@@ -11,20 +12,27 @@ struct tLista
   int temRepeticao;
 };
 
-int buscaBinaria(Lista * lista,int valor, int * pos){
-  int posFinal = lista->numElementos-1;
+int buscaBinaria(Lista *lista, int valor, int *pos)
+{
+  int posFinal = lista->numElementos - 1;
   int posInicial = 0;
-  int elementos;
-  while(posInicial < posFinal){
-    elementos = posFinal - posInicial;
-    elementos /= 2;
-    if(lista->numeros[elementos]==valor){
-      (*pos) = elementos;
+  int elemento;
+  while (posInicial < posFinal)
+  {
+    elemento = posFinal - posInicial;
+    elemento /= 2;
+    if (lista->numeros[elemento] == valor)
+    {
+      (*pos) = elemento;
       return 1;
-    }else if(lista->numeros[elementos] < valor){
-      posFinal = elementos + 1;
-    }else{
-      posInicial = elementos - 1;
+    }
+    else if (lista->numeros[elemento] < valor)
+    {
+      posFinal = elemento + 1;
+    }
+    else
+    {
+      posInicial = elemento - 1;
     }
   }
   (*pos) = posInicial;
@@ -71,7 +79,7 @@ int listaVazia(Lista *lista)
 
 void adicionarNumero(Lista *lista, int valor)
 {
-  int *posicao;
+  int *posicao = NULL;
   if (listaCheia(lista))
   {
     printf("\nLista cheia");
@@ -84,9 +92,13 @@ void adicionarNumero(Lista *lista, int valor)
       {
         lista->numeros[lista->numElementos] = valor;
         lista->numElementos++;
-      }else{
-        
+      }
+      else
+      {
+        buscaBinaria(lista, valor, posicao);
+        memcpy(lista->numeros + sizeof(int) * ((*posicao) + 1), lista->numeros + sizeof(int) * (*posicao), sizeof(int) * (lista->numElementos - (*posicao)));
+        lista->numeros[(*posicao)] = valor;
       }
     }
   }
-} 
+}
