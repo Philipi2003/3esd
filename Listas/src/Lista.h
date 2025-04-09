@@ -12,10 +12,12 @@
   S         N         - busca e remove, fazendo memmove e voltando a verificar até o final
   N         S         - buscaBinaria().then(pos => memmove(lista[pos], lista[numElementos-1], sizeof(lista))).then(numElementos--)
   S         S         - buscaBinaria().then(while pra achar o posInicio e outro para achar o posFinal).then((posFinal,posInicio) => if(lista[posFinal+1]){memmove(lista[posInicio], lista[posFinal+1], sizeof(lista) * (numElementos-1-posFinal+1))} else {
-  memset(lista[posInicio], NULL, posFinal-posInicio+1)} ).then(numElementos -= posFinal-posInicio+1)
+  memset(lista[posInicio], NULL, posFinal-posInicio+1)} ).then(numElementos -= posFinal-posInicio+1) 
 */
 
 typedef struct tLista Lista;
+
+int buscaBinaria(Lista * lista,int valor, int * pos);
 
 Lista *criaLista(int max, int ehClassificado, int temRepeticao);
 

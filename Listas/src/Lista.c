@@ -11,6 +11,26 @@ struct tLista
   int temRepeticao;
 };
 
+int buscaBinaria(Lista * lista,int valor, int * pos){
+  int posFinal = lista->numElementos-1;
+  int posInicial = 0;
+  int elementos;
+  while(posInicial < posFinal){
+    elementos = posFinal - posInicial;
+    elementos /= 2;
+    if(lista->numeros[elementos]==valor){
+      (*pos) = elementos;
+      return 1;
+    }else if(lista->numeros[elementos] < valor){
+      posFinal = elementos + 1;
+    }else{
+      posInicial = elementos - 1;
+    }
+  }
+  (*pos) = posInicial;
+  return 0;
+}
+
 Lista *criaLista(int max, int ehClassificado, int temRepeticao)
 {
   Lista *lista = (Lista *)malloc(sizeof(Lista));
@@ -51,6 +71,7 @@ int listaVazia(Lista *lista)
 
 void adicionarNumero(Lista *lista, int valor)
 {
+  int *posicao;
   if (listaCheia(lista))
   {
     printf("\nLista cheia");
@@ -63,7 +84,9 @@ void adicionarNumero(Lista *lista, int valor)
       {
         lista->numeros[lista->numElementos] = valor;
         lista->numElementos++;
+      }else{
+        
       }
     }
   }
-}
+} 
